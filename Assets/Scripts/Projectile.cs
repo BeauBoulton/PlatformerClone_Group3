@@ -5,21 +5,20 @@ using UnityEngine;
 /*
  *Nick Sumek
  * 4/ 8 / 25
- * controlls gun function
+ * sets up the projectile prefab
  */
 
-
-public class NewBehaviourScript : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    //variables
+    [Header("Pojectile Variables")]
     public float speed = 10;
     public bool goingLeft;
 
+    public float stunTimer;
 
-    // Start is called before the first frame update
+    // Update is called once per frame
     void Update()
     {
-        //sets what position the laster fires
         if (goingLeft == true)
         {
             transform.position += speed * Vector3.left * Time.deltaTime;
@@ -31,11 +30,4 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
     }
-
-   
-
-
-
-
-
 }
