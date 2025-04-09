@@ -467,9 +467,21 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3561194946133032445, guid: 73c590742c5be814e9738957fb1f85b0, type: 3}
+      propertyPath: goingLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561194946133032445, guid: 73c590742c5be814e9738957fb1f85b0, type: 3}
+      propertyPath: shotCoolDown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561194946133032445, guid: 73c590742c5be814e9738957fb1f85b0, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 2560117367031196398, guid: 3223d508ab7bc6e4caf0642e361fc9e7, type: 3}
+    - target: {fileID: 3561194946133032445, guid: 73c590742c5be814e9738957fb1f85b0, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

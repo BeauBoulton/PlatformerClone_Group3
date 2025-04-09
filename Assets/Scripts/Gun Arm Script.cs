@@ -12,8 +12,10 @@ public class GunArmScript : MonoBehaviour
 {
     //projectile variables
     public bool goingLeft;
-
+    private bool canFire = true;
     //spawner variables
+
+    public float shotCoolDown = .5f;
 
     public GameObject projectilePrefab;
     public float timeBetweenShots;
@@ -32,7 +34,11 @@ public class GunArmScript : MonoBehaviour
 
     private void Update()
     {
-        shoot();
+        if (canFire && Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnProjectile();
+            StartCoroutine(ShotDelay());
+        }
     }
 
     //sets up the spawning of projectiles
@@ -47,18 +53,24 @@ public class GunArmScript : MonoBehaviour
 
     }
     //sets the space bar action to be what shoots
-    public void shoot()
+    
+   
+
+    IEnumerator ShotDelay()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
 
-        {
-            SpawnProjectile();
 
-        }
+
+        canFire = false;
+        yield return new WaitForSeconds(shotCoolDown);
+        canFire = true;
+
+
 
 
 
     }
+
 
 
 
