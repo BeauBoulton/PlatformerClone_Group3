@@ -18,15 +18,19 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
 
     // Respawn variables
-    public int playerHealth = 99; 
+    public int playerHealth = 99;
     public int fallDepth;
     private Vector3 startPosition;
 
     // Variables for iframes
-    public bool isInvincible = false; 
-    public int iFramesSpeed;
+    public bool isInvincible = false;
+    public int iFramesTime = 5;
     public float blinkSpeed;
-    public MeshRenderer meshRenderer; 
+    public MeshRenderer body;
+    public MeshRenderer head;
+    public MeshRenderer visor;
+    public MeshRenderer rShoulder;
+    public MeshRenderer lShoulder;
 
     // Start is called before the first frame update
     void Start()
@@ -45,13 +49,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the object colliding is tagged as Hazard, decrease 
+        // If the object colliding is tagged as Hazard, decrease health
         if (other.gameObject.tag == "Hazard")
         {
+            // Checks if the player is not invincible so that health isn't remuved during iframes
             if (!isInvincible)
             {
+                // Removes health and starts iframes
                 playerHealth -= 15;
-                StartCoroutine(IFrames()); 
+                StartCoroutine(IFrames());
             }
         }
     }
@@ -68,7 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             // If the player inputs the a key or left arrow, move player object left
             rigidbody.MovePosition(transform.position += Vector3.left * speed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(0, 180, 0); 
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -81,7 +87,8 @@ public class PlayerController : MonoBehaviour
         transform.position += add_position;
         if (transform.position.y < fallDepth)
         {
-            // Respawn player if they fall out of bounds
+            // Damages and respawns player if they fall out of bounds
+            playerHealth -= 15;
             Respawn();
         }
     }
@@ -111,28 +118,57 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Respawns the player and deducts a life if the player has more than 0 lives
+    /// Respawns the player at startPosition
     /// </summary>
     private void Respawn()
     {
-        // Respawns player at start position and deducts a life
+        // Respawns player at start position and puts them in iframes
         transform.position = startPosition;
+        StartCoroutine(IFrames()); 
     }
 
-    private void Blinking()
+    /// <summary>
+    /// Starts the BlinkDelay coroutine
+    /// </summary>
+    public void Blink()
     {
-        
+        StartCoroutine(BlinkDelay());
     }
 
-    IEnumerator BlinkTimer()
-    {
-        yield return new WaitForSeconds(blinkSpeed); 
+    // This is a coroutine, it disables the mesh renderers for the player, starts a timer for the duration of the blink speed variable, then re-enables the mesh renderers
+    IEnumerator BlinkDelay()
+    { 
+        body.enabled = false;
+        head.enabled = false;
+        visor.enabled = false;
+        rShoulder.enabled = false;
+        lShoulder.enabled = false;
+        yield return new WaitForSeconds(blinkSpeed);
+        body.enabled = true;
+        head.enabled = true;
+        visor.enabled = true;
+        rShoulder.enabled = true;
+        lShoulder.enabled = true;
     }
 
+    // This is a coroutine, it is a timer. It makes the player invincible and invokes Blink repeating for iFramesTime number of seconds
     IEnumerator IFrames()
     {
-        isInvincible = true; 
-        yield return new WaitForSeconds(iFramesSpeed);
-        isInvincible = false; 
+        // Set isInvincible to true so player can't take damage while coroutine is running
+        isInvincible = true;
+        // Invokes Blink repeatedly at a rate of the blinkSpeed variable * 2
+        InvokeRepeating("Blink", 0, (blinkSpeed * 2)); 
+        // Sets a timer for iFramesTime number of seconds
+        yield return new WaitForSeconds(iFramesTime);
+        // Removes invincibility
+        isInvincible = false;
+        // Stops invoking Blink
+        CancelInvoke("Blink"); 
+        // Enables all mesh renderers in case they were disabled at the end of the timer 
+        body.enabled = true;
+        head.enabled = true;
+        visor.enabled = true;
+        rShoulder.enabled = true;
+        lShoulder.enabled = true;
     }
 }

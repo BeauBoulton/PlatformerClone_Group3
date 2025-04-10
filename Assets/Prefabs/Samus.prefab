@@ -305,9 +305,9 @@ MonoBehaviour:
   playerHealth: 99
   fallDepth: 0
   isInvincible: 0
-  iFramesSpeed: 0
-  blinkSpeed: 0
-  meshRenderer: {fileID: 0}
+  iFramesTime: 5
+  blinkSpeed: 0.2
+  meshRenderer: {fileID: 4059683051240698353}
 --- !u!54 &4626676193620789351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!136 &6222044621649301822
 CapsuleCollider:
