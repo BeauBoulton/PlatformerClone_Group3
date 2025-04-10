@@ -13,6 +13,8 @@ public class GunArmScript : MonoBehaviour
     //projectile variables
     public bool goingLeft;
     private bool canFire = true;
+    private Transform playerRef;
+
     //spawner variables
 
     public float shotCoolDown = .5f;
@@ -26,7 +28,7 @@ public class GunArmScript : MonoBehaviour
     {
         //need to change to a key stroke "space bar" not invoke repeating
        // InvokeRepeating("SpawnProjectile", startDelay, timeBetweenShots);
-
+       playerRef = transform.parent;
         
 
 
@@ -39,6 +41,15 @@ public class GunArmScript : MonoBehaviour
             SpawnProjectile();
             StartCoroutine(ShotDelay());
         }
+        /*
+        if (playerRef = Quaternion.Euler(0, 180, 0)
+            {
+
+            }
+
+        */
+
+
     }
 
     //sets up the spawning of projectiles
