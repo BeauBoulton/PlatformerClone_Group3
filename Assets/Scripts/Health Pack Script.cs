@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 /*
  *Nick Sumek
- * 4/ 10 / 25
- * sets up the item pick ups/ power ups for the game
+ * 4/ 8 / 25
+ * sets up the health pack function
  */
 
 
-public class ItemsScript : MonoBehaviour
+public class HealthPackScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

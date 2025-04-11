@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 6222044621649301822}
   m_Layer: 0
   m_Name: Samus
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,6 +312,7 @@ MonoBehaviour:
   visor: {fileID: 0}
   rShoulder: {fileID: 0}
   lShoulder: {fileID: 0}
+  gun: {fileID: 0}
 --- !u!54 &4626676193620789351
 Rigidbody:
   m_ObjectHideFlags: 0

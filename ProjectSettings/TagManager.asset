@@ -7,6 +7,9 @@ TagManager:
   - Hazard
   - Bullet
   - Bullet2
+  - upgrade
+  - boost
+  - heal
   layers:
   - Default
   - TransparentFX
