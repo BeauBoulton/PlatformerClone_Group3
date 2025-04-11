@@ -13,8 +13,7 @@ public class GunArmScript : MonoBehaviour
     //projectile variables
     public bool goingLeft;
     private bool canFire = true;
-    private Transform playerRef;
-
+    private float playerRotation;
     //spawner variables
 
     public float shotCoolDown = .5f;
@@ -28,7 +27,7 @@ public class GunArmScript : MonoBehaviour
     {
         //need to change to a key stroke "space bar" not invoke repeating
        // InvokeRepeating("SpawnProjectile", startDelay, timeBetweenShots);
-       playerRef = transform.parent;
+      // playerRef = transform.parent.rotation.y;
         
 
 
@@ -36,18 +35,19 @@ public class GunArmScript : MonoBehaviour
 
     private void Update()
     {
+        playerRotation = Mathf.RoundToInt(transform.parent.rotation.eulerAngles.y);//updates with char position
+        print(playerRotation);
+        shotDirection();//checks for character rotaion
+
         if (canFire && Input.GetKeyDown(KeyCode.Space))
         {
             SpawnProjectile();
             StartCoroutine(ShotDelay());
         }
-        /*
-        if (playerRef = Quaternion.Euler(0, 180, 0)
-            {
+        
+       
 
-            }
-
-        */
+        
 
 
     }
@@ -58,6 +58,7 @@ public class GunArmScript : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         if (projectile.GetComponent<Projectile>())
         {
+            print(goingLeft);
             projectile.GetComponent<Projectile>().goingLeft = goingLeft;
 
         }
@@ -82,7 +83,21 @@ public class GunArmScript : MonoBehaviour
 
     }
 
+    //decides which way to shoot the projectile
+    private void shotDirection()
+    {
+        if (playerRotation == 0)
+        {
+            goingLeft = false;
+        }
 
+        if (playerRotation == 180)
+        {
+            goingLeft = true;
+        }
+
+
+    }
 
 
 }

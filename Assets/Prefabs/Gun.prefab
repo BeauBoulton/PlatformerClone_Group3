@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6695413740593824428}
   - component: {fileID: 8513316120812597553}
   - component: {fileID: 207081077913537009}
-  - component: {fileID: 3561194946133032445}
+  - component: {fileID: 1550898188425263771}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3561194946133032445
+--- !u!114 &1550898188425263771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
