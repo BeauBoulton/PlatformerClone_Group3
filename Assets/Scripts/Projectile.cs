@@ -28,6 +28,21 @@ public class Projectile : MonoBehaviour
         {
             transform.position += speed * Vector3.right * Time.deltaTime;
         }
+        
+        
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Hit something");
+        print("Tag of hit object is: " + other.tag);
+        if(other.gameObject.tag != "Player" )
+        {
+            print("Hit non-player");
+            Destroy(gameObject);
+        }
+    }
+
+
 }
