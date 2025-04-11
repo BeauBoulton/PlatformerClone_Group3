@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public MeshRenderer visor;
     public MeshRenderer rShoulder;
     public MeshRenderer lShoulder;
+    public MeshRenderer gun; 
 
     // Start is called before the first frame update
     void Start()
@@ -47,10 +48,10 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         // If the object colliding is tagged as Hazard, decrease health
-        if (other.gameObject.tag == "Hazard")
+        if (collision.gameObject.tag == "Hazard")
         {
             // Checks if the player is not invincible so that health isn't remuved during iframes
             if (!isInvincible)
@@ -143,12 +144,14 @@ public class PlayerController : MonoBehaviour
         visor.enabled = false;
         rShoulder.enabled = false;
         lShoulder.enabled = false;
+        gun.enabled = false;
         yield return new WaitForSeconds(blinkSpeed);
         body.enabled = true;
         head.enabled = true;
         visor.enabled = true;
         rShoulder.enabled = true;
         lShoulder.enabled = true;
+        gun.enabled = true;
     }
 
     // This is a coroutine, it is a timer. It makes the player invincible and invokes Blink repeating for iFramesTime number of seconds
@@ -170,5 +173,6 @@ public class PlayerController : MonoBehaviour
         visor.enabled = true;
         rShoulder.enabled = true;
         lShoulder.enabled = true;
+        gun.enabled = true;
     }
 }
