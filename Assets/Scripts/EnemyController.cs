@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * Name: Beau Boulton
+ * Date: 4/10/25
+ * Description: Handles enemy movement and hp. 
+ */
 
 public class EnemyController : MonoBehaviour
 {
@@ -85,12 +90,19 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Checks the tag of the collider and adjusts damage based on type of bullet
         if (other.gameObject.tag == "Bullet")
         {
             enemyHealth -= 1; 
         }
+
+        if (other.gameObject.tag == "Bullet 2")
+        {
+            enemyHealth -= 3; 
+        }
     }
 
+    // Destroys self if hp hits 0
     private void EnemyDie()
     {
         if (enemyHealth <= 0)

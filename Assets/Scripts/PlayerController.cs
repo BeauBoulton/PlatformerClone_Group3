@@ -63,6 +63,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Health Pack")
+        {
+            //playerHealth += other.healthUp; 
+        }
+    }
+
     /// <summary>
     /// Moves player left and right using arrow keys or "a" and "d"
     /// </summary>
