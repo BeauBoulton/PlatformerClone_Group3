@@ -8,8 +8,8 @@ TagManager:
   - Bullet
   - Bullet2
   - upgrade
-  - boost
   - heal
+  - Jump Boost
   layers:
   - Default
   - TransparentFX

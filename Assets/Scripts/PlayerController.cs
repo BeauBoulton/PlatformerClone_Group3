@@ -6,12 +6,17 @@ using UnityEngine.SceneManagement;
  * Name: Beau Boulton
  * Date: 4/8/25
  * Description: Handles player movement and HP. 
+ * Last Edited: 4/14/25
  */
 
 public class PlayerController : MonoBehaviour
 {
     // Jump force added when player presses space
     public float jumpForce = 8f;
+    // Bool to check if player picked up jump boost
+    public bool hasJumpBoost = false;
+    // Variable to check if player is currently jumping for double jump
+    public int isJumping = 0;
     // Player movement speed
     public float speed = 10f;
     // Rigidbody to add force to
@@ -31,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public MeshRenderer visor;
     public MeshRenderer rShoulder;
     public MeshRenderer lShoulder;
-    public MeshRenderer gun; 
+    public MeshRenderer gun;
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +68,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Jump Boost")
+        {
+            hasJumpBoost = true;
+            Destroy (other.gameObject);
+        }
+        
         if (other.gameObject.tag == "Health Pack")
         {
             //playerHealth += other.healthUp; 
@@ -110,19 +121,50 @@ public class PlayerController : MonoBehaviour
         // Handles jumping
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            RaycastHit hit;
-            // If the raycast returns true then an object has been hit and the player is touching the floor
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+            CheckIfJumping();
+
+            if (!hasJumpBoost)
             {
-                Debug.Log("Touching the ground");
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                // If the player does not have the jump pack, they can only jump when they are touching the floor
+                // isJumping is always set to 0 when the player is touching the floor
+                if (isJumping == 0)
+                {
+                    rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                }
             }
 
-            else
-            {
-                Debug.Log("Cannot jump, not touching the ground");
+            if (hasJumpBoost) 
+            { 
+                // If the player has the jump boost, they can jump if isJumping is 0 or 1 so they can jump when they are on the floor or if they have jumped once
+                // Once they have jumped twice they can no longer keep jumping until touching the floor
+                if (isJumping <= 1)
+                {
+                    rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                }
             }
+        }
+    }
 
+    /// <summary>
+    /// Checks if the player is jumping for the purpose of double jumping
+    /// </summary>
+    private void CheckIfJumping()
+    {
+        RaycastHit hit;
+        // If the raycast returns true then an object has been hit and the player is touching the floor
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+        {
+            // Sets isJumping ot 0 if the player is touching the floor
+            isJumping = 0;
+        }
+        
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                // Increases isJumping every time the player presses W or Up and is not touching the floor
+                isJumping++; 
+            }
         }
     }
 
