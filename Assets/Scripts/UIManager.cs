@@ -22,6 +22,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Energy: " + playerController.playerHealth;
+        healthText.text = "Energy: " + playerController.currentPlayerHealth;
     }
 }

@@ -96,7 +96,7 @@ public class EnemyController : MonoBehaviour
             enemyHealth -= 1; 
         }
 
-        if (other.gameObject.tag == "Bullet 2")
+        if (other.gameObject.tag == "Bullet2")
         {
             enemyHealth -= 3; 
         }

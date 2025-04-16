@@ -1,11 +1,13 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
- *Nick Sumek
+ * Nick Sumek, Beau Boulton
  * 4/ 8 / 25
  * sets up the gun arm as a spawn location for pre fab projectiles
+ *  * Last edited: 4/15/25
  */
 
 public class GunArmScript : MonoBehaviour
@@ -17,10 +19,19 @@ public class GunArmScript : MonoBehaviour
     //spawner variables
 
     public float shotCoolDown = .5f;
+ 
+    // PlayerController to get the hasHeavyBullet variable
+    public PlayerController playerController;
 
-    public GameObject projectilePrefab;
+    // Game objects for normal bullet, heavy bullet, and which bullet to use
+    public GameObject normalBullet;
+    public GameObject heavyBullet;
+    public GameObject bulletToUse; 
+
+
     public float timeBetweenShots;
     public float startDelay;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +66,20 @@ public class GunArmScript : MonoBehaviour
     //sets up the spawning of projectiles
     public void SpawnProjectile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        // Gets hasHeavyBullets from PlayerController
+        bool hasHeavyBullets = playerController.hasHeavyBullets;
+        
+        // Bullet to use is normal bullet by default
+        bulletToUse = normalBullet;
+
+        // If hasHeavyBullets form PlayerController is true, bullet to use is heavy bullet
+        if (hasHeavyBullets == true)
+        {
+           bulletToUse = heavyBullet;
+        }
+
+        // Instantiates projectile using the bulletToUse object at the position of the gun arm
+        GameObject projectile = Instantiate(bulletToUse, transform.position, bulletToUse.transform.rotation);
         if (projectile.GetComponent<Projectile>())
         {
             print(goingLeft);

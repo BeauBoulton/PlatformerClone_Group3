@@ -122,6 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goingLeft: 0
   shotCoolDown: 0.5
-  projectilePrefab: {fileID: 2560117367031196398, guid: 3223d508ab7bc6e4caf0642e361fc9e7, type: 3}
+  playerController: {fileID: 0}
+  normalBullet: {fileID: 2560117367031196398, guid: 3223d508ab7bc6e4caf0642e361fc9e7, type: 3}
+  heavyBullet: {fileID: 8886939206250859316, guid: 2877f1f928db2834a98a3eac791ac5a7, type: 3}
+  bulletToUse: {fileID: 2560117367031196398, guid: 3223d508ab7bc6e4caf0642e361fc9e7, type: 3}
   timeBetweenShots: 0
   startDelay: 0

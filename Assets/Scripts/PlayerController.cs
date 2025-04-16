@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 /*
- * Name: Beau Boulton
+ * Name: Beau Boulton, Nick Sumek
  * Date: 4/8/25
  * Description: Handles player movement and HP. 
- * Last Edited: 4/14/25
+ * Last Edited: 4/15/25
  */
 
 public class PlayerController : MonoBehaviour
@@ -19,11 +20,14 @@ public class PlayerController : MonoBehaviour
     public int isJumping = 0;
     // Player movement speed
     public float speed = 10f;
+    // Bool for heavy bullets
+    public bool hasHeavyBullets = false; 
     // Rigidbody to add force to
     private Rigidbody rigidbody;
 
     // Respawn variables
-    public int playerHealth = 99;
+    public int maxPlayerHealth = 99; 
+    public int currentPlayerHealth = 99;
     public int fallDepth;
     private Vector3 startPosition;
 
@@ -62,7 +66,7 @@ public class PlayerController : MonoBehaviour
             if (!isInvincible)
             {
                 // Removes health and starts iframes
-                playerHealth -= 15;
+                currentPlayerHealth -= 15;
                 StartCoroutine(IFrames());
             }
         }
@@ -70,15 +74,42 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // If the collider is the jump boost, set hasJumpBoost to true to enable double jump
         if (other.gameObject.tag == "Jump Boost")
         {
             hasJumpBoost = true;
             Destroy (other.gameObject);
         }
         
+        // If the collider is the health pickup, increase max health by 100 and 
+        if (other.gameObject.tag == "Health Pickup")
+        {
+            maxPlayerHealth += 100; 
+            currentPlayerHealth = maxPlayerHealth; 
+            Destroy (other.gameObject);
+        }
+
+        // If the collider is the health pack, increase health by the amount in the health pack
         if (other.gameObject.tag == "Health Pack")
         {
-            //playerHealth += other.healthUp; 
+            // Getting the health variable from the health pack
+            int addedHealth = other.GetComponent<HealthPackScript>().addedHealth;
+            currentPlayerHealth += addedHealth;
+
+            // Makes sure that current health can't go above max health 
+            if (currentPlayerHealth > maxPlayerHealth)
+            {
+                currentPlayerHealth = maxPlayerHealth;
+            }
+
+            Destroy (other.gameObject);
+        }
+
+        // If the collider is the gun upgrade, set has heavy bullets to true
+        if (other.gameObject.tag == "upgrade")
+        {
+            hasHeavyBullets = true;
+            Destroy(other.gameObject); 
         }
     }
 
@@ -108,7 +139,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < fallDepth)
         {
             // Damages and respawns player if they fall out of bounds
-            playerHealth -= 15;
+            currentPlayerHealth -= 15;
             Respawn();
         }
     }
