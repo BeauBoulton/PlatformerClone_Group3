@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     // Bool to check if player picked up jump boost
     public bool hasJumpBoost = false;
     // Variable to check if player is currently jumping for double jump
-    public int isJumping = 0;
+    private int isJumping = 0;
     // Player movement speed
     public float speed = 10f;
     // Bool for heavy bullets
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
 
     // Variables for iframes
-    public bool isInvincible = false;
+    private bool isInvincible = false;
     public int iFramesTime = 5;
     public float blinkSpeed;
     public MeshRenderer body;
@@ -92,17 +92,21 @@ public class PlayerController : MonoBehaviour
         // If the collider is the health pack, increase health by the amount in the health pack
         if (other.gameObject.tag == "Health Pack")
         {
-            // Getting the health variable from the health pack
-            int addedHealth = other.GetComponent<HealthPackScript>().addedHealth;
-            currentPlayerHealth += addedHealth;
-
-            // Makes sure that current health can't go above max health 
-            if (currentPlayerHealth > maxPlayerHealth)
+            // Prevents player from picking up health pack if their health is already full
+            if (currentPlayerHealth < maxPlayerHealth)
             {
-                currentPlayerHealth = maxPlayerHealth;
-            }
+                // Getting the health variable from the health pack
+                int addedHealth = other.GetComponent<HealthPackScript>().addedHealth;
+                currentPlayerHealth += addedHealth;
 
-            Destroy (other.gameObject);
+                // Makes sure that current health can't go above max health 
+                if (currentPlayerHealth > maxPlayerHealth)
+                {
+                    currentPlayerHealth = maxPlayerHealth;
+                }
+
+                Destroy(other.gameObject);
+            }
         }
 
         // If the collider is the gun upgrade, set has heavy bullets to true

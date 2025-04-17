@@ -49,11 +49,14 @@ public class EnemyController : MonoBehaviour
         if (goingLeft)
         {
             RaycastHit hit;
-            // If the raycast returns true then an object has been hit and the enemy changes
-            // the left boundary to the current position
+            // If the raycast returns true then an object has been hit 
             if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f))
             {
-                leftPos = transform.position;
+                // If the hit object is a wall or another enemy, the enemy changes direction
+                if (hit.transform.tag == "Wall" || hit.transform.tag == "Hazard")
+                {
+                    goingLeft = false;
+                }
             }
             // If left boundary has been reached, change direction to right, else continue going left
             if (transform.position.x <= leftPos.x)
@@ -69,11 +72,14 @@ public class EnemyController : MonoBehaviour
         else
         {
             RaycastHit hit;
-            // If the raycast returns true then an object has been hit and the enemy changes
-            // the right boundary to the current position
+            // If the raycast returns true then an object has been hit 
             if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f))
             {
-                rightPos = transform.position;
+                // If the hit object is a wall or another enemy, the enemy changes direction
+                if (hit.transform.tag == "Wall" || hit.transform.tag == "Hazard")
+                {
+                    goingLeft = true;
+                }
             }
 
             // If right boundary is reached, change direction to left, else continue going right

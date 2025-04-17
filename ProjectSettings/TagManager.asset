@@ -8,9 +8,10 @@ TagManager:
   - Bullet
   - Bullet2
   - upgrade
-  - heal
   - Jump Boost
   - Health Pack
+  - Health Pickup
+  - Wall
   layers:
   - Default
   - TransparentFX

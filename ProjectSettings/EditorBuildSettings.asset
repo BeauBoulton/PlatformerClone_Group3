@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game Over.unity
     guid: 8c09a994f0912204baf20f7f1116f03f
+  - enabled: 1
+    path: Assets/Scenes/Beau WIP.unity
+    guid: fee751f088371154e99a9a6abe60f1e6
+  - enabled: 1
+    path: Assets/Scenes/You Win!.unity
+    guid: 7d93f11ed735dff4b9df8f6aedd3dbac
   m_configObjects: {}
