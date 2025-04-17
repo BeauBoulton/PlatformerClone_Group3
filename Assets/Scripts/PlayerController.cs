@@ -70,6 +70,24 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(IFrames());
             }
         }
+
+        // If Samus collides with a wall, raycasts to find if the wall is to the left or right and
+        // then pushes Samus in the opposite direction
+        if (collision.gameObject.tag == "Wall")
+        {
+            RaycastHit hit;
+            // If the raycast returns true then an object has been hit and the player is touching a wall 
+            if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f))
+            {
+                rigidbody.MovePosition(transform.position += Vector3.left * speed * Time.deltaTime);
+            }
+            
+            if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f))
+            {
+                rigidbody.MovePosition(transform.position += Vector3.right * speed * Time.deltaTime);
+            }
+                
+        }
     }
 
     private void OnTriggerEnter(Collider other)
