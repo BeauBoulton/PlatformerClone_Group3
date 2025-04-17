@@ -77,14 +77,14 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit hit;
             // If the raycast returns true then an object has been hit and the player is touching a wall 
-            if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.5f))
+            if (Physics.Raycast(transform.position, Vector3.right, out hit, 1f))
             {
-                rigidbody.MovePosition(transform.position += Vector3.left * speed * Time.deltaTime);
+                rigidbody.MovePosition(transform.position += Vector3.left * speed * 2 * Time.deltaTime);
             }
             
-            if (Physics.Raycast(transform.position, Vector3.left, out hit, 0.5f))
+            if (Physics.Raycast(transform.position, Vector3.left, out hit, 1f))
             {
-                rigidbody.MovePosition(transform.position += Vector3.right * speed * Time.deltaTime);
+                rigidbody.MovePosition(transform.position += Vector3.right * speed * 2 * Time.deltaTime);
             }
                 
         }
