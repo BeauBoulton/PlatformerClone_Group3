@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6417004302206739831}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.294315, y: 5.07, z: 0.7079563}
-  m_LocalScale: {x: 1.1503, y: 8.000891, z: 8.020027}
+  m_LocalScale: {x: 2.1033275, y: 8.000891, z: 1.8564078}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,7 +132,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &6417004302206739831
 MonoBehaviour:
