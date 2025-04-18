@@ -899,7 +899,8 @@ PrefabInstance:
       value: Samus
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 340121755535117251, guid: 2bd29c81148d9ed4085f46b6a0758506, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bd29c81148d9ed4085f46b6a0758506, type: 3}
