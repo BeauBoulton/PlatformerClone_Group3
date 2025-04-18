@@ -1199,6 +1199,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hard Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4759030469407667953, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
+      propertyPath: enemyDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759030469407667953, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
+      propertyPath: enemyHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8672334822763519602, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 312.8
@@ -1386,6 +1394,14 @@ PrefabInstance:
     - target: {fileID: 3602503297995898280, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
       propertyPath: m_Name
       value: Hard Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759030469407667953, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
+      propertyPath: enemyDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759030469407667953, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
+      propertyPath: enemyHealth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8672334822763519602, guid: c93e30e7266b52c4683f8b7febdc9f61, type: 3}
       propertyPath: m_LocalPosition.x
