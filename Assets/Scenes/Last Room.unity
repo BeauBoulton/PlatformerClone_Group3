@@ -237,6 +237,10 @@ PrefabInstance:
       value: EnemyCounter
       objectReference: {fileID: 0}
     - target: {fileID: 1107800488122600664, guid: 6a3e553924e4db549ae733a78a34f205, type: 3}
+      propertyPath: winScene
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107800488122600664, guid: 6a3e553924e4db549ae733a78a34f205, type: 3}
       propertyPath: sceneIndex
       value: 4
       objectReference: {fileID: 0}

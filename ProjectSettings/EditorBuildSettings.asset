@@ -9,12 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Screen.unity
     guid: d50a3ee64ed2e7b42a843680130d9316
   - enabled: 1
+    path: Assets/Scenes/Main Level.unity
+    guid: 4209ffe957762ab42a10f1bc15cbc094
+  - enabled: 1
+    path: Assets/Scenes/Last Room.unity
+    guid: cb7fcfb78d76ab44ea1d76ebc5eb1f15
+  - enabled: 0
     path: Assets/Scenes/Nick WIP.unity
     guid: 4b41fd0ed4e639740b068b43546ae582
   - enabled: 1
     path: Assets/Scenes/Game Over.unity
     guid: 8c09a994f0912204baf20f7f1116f03f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Beau WIP.unity
     guid: fee751f088371154e99a9a6abe60f1e6
   - enabled: 1
