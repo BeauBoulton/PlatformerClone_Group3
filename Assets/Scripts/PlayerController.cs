@@ -25,9 +25,10 @@ public class PlayerController : MonoBehaviour
     // Rigidbody to add force to
     private Rigidbody rigidbody;
 
-    // Respawn variables
+    // Health and damage variables
     public int maxPlayerHealth = 99; 
     public int currentPlayerHealth = 99;
+    public int enemyDamage = 15; 
     public int fallDepth;
     private Vector3 startPosition;
 
@@ -65,8 +66,10 @@ public class PlayerController : MonoBehaviour
             // Checks if the player is not invincible so that health isn't remuved during iframes
             if (!isInvincible)
             {
+                // Gets enemy damage variable from enemy and sets it to the local enemyDamage variable
+                enemyDamage = collision.gameObject.GetComponent<EnemyController>().enemyDamage; 
                 // Removes health and starts iframes
-                currentPlayerHealth -= 15;
+                currentPlayerHealth -= enemyDamage;
                 StartCoroutine(IFrames());
             }
         }

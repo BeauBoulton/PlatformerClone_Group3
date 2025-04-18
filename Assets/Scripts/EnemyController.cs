@@ -9,7 +9,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int enemyHealth; 
+    public int enemyHealth;
+
+    public int enemyDamage; 
 
     // Variables for left and right boundary game objects
     public GameObject leftPoint;
