@@ -28,8 +28,14 @@ public class Projectile : MonoBehaviour
         {
             transform.position += speed * Vector3.right * Time.deltaTime;
         }
-        
-        
+
+        if (transform.position.x > 50 || transform.position.x < -50)
+        {
+            Destroy(gameObject); 
+        }
+
+
+
 
     }
 

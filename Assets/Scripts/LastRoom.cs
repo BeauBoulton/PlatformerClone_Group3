@@ -20,7 +20,7 @@ public class LastRoom : MonoBehaviour
     // Variable for how many enemies are left in room
     private int enemiesLeft;
 
-    public int sceneIndex; 
+    public int winScene; 
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +56,7 @@ public class LastRoom : MonoBehaviour
         // Loads the win screen if there are no enemies left
         if (enemiesLeft == 0)
         {
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(winScene);
         }
     }
 

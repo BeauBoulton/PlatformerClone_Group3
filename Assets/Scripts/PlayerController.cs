@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public int currentPlayerHealth = 99;
     public int enemyDamage = 15; 
     public int fallDepth;
+    public int gameOverScene; 
     private Vector3 startPosition;
 
     // Variables for iframes
@@ -56,6 +57,10 @@ public class PlayerController : MonoBehaviour
     {
         Jump();
         Move();
+        if (currentPlayerHealth <= 0)
+        {
+            SceneManager.LoadScene(gameOverScene);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
