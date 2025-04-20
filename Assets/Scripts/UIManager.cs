@@ -13,11 +13,9 @@ public class UIManager : MonoBehaviour
 {
     public PlayerController playerController;
     public TMP_Text healthText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TMP_Text eTanksText;
+    public TMP_Text jumpBoostText; 
+    public TMP_Text heavyBulletText;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +29,27 @@ public class UIManager : MonoBehaviour
         {
             healthText.text = "Energy: 0";
         }
-        
+
+        eTanksText.text = "Energy Tanks: " + playerController.eTanks;
+
+        if (playerController.hasJumpBoost)
+        {
+            jumpBoostText.text = "Jump Boost"; 
+        }
+
+        else
+        {
+            jumpBoostText.text = " ";
+        }
+
+        if (playerController.hasHeavyBullets)
+        {
+            heavyBulletText.text = "Heavy Bullets"; 
+        }
+
+        else
+        {
+            heavyBulletText.text = " ";
+        }
     }
 }

@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
  * Name: Beau Boulton
  * Date: 4/15/25
  * Description: Handles game ending when all enemies in the last room are dead
- * Last Edited: 4/16/25
+ * Last Edited: 4/18/25
  */
 public class LastRoom : MonoBehaviour
 {
@@ -18,15 +18,23 @@ public class LastRoom : MonoBehaviour
     public int enemiesInRoom;
 
     // Variable for how many enemies are left in room
-    private int enemiesLeft;
+    public int enemiesLeft;
+    
+    // Lets you select the index of the win scene in the inspector
+    public int winScene;
 
-    public int winScene; 
+    // Bool for disabling the check for enemies left at the start
+    private bool enableCheck = false;
 
     // Start is called before the first frame update
     void Start()
     {
         // Instantiate the enemy array
         enemyArray = new EnemyController[enemiesInRoom];
+        // Sets the number of enemies left to the number of slots in the array
+        enemiesLeft = enemiesInRoom;
+        // Delays the CheckForEnemiesLeft in update
+        StartCoroutine(DelayCheck());
     }
 
     // Update is called once per frame
@@ -41,22 +49,27 @@ public class LastRoom : MonoBehaviour
     /// </summary>
     private void CheckForEnemiesLeft()
     {
-        // Sets the number of enemies left to the number of slots in the array
-        enemiesLeft = enemiesInRoom;
+        // Only runs if enable check is true so that it doesn't run at the start and transition to win screen prematurely
+        if (enableCheck == true)
+        {
 
-        // Checks each array slot and decreases number of enemies left when a null slot is detected
-        for (int i = 0; i < enemyArray.Length; i++)
-        {
-            if (enemyArray[i] == null)
+            // Reset enemiesLeft so that the counter doesn't keep dropping every frame
+            enemiesLeft = enemiesInRoom;
+
+            // Checks each array slot and decreases number of enemies left when a null slot is detected
+            for (int i = 0; i < enemyArray.Length; i++)
             {
-                enemiesLeft--; 
+                if (enemyArray[i] == null)
+                {
+                    enemiesLeft--;
+                    
+                    // Loads the win screen if there are no enemies left
+                    if (enemiesLeft == 0)
+                    {
+                        SceneManager.LoadScene(winScene);
+                    }
+                }
             }
-        }
-        
-        // Loads the win screen if there are no enemies left
-        if (enemiesLeft == 0)
-        {
-            SceneManager.LoadScene(winScene);
         }
     }
 
@@ -74,12 +87,11 @@ public class LastRoom : MonoBehaviour
             // If the index is null, assign the current enemyToAdd to it
             if (enemyArray[i] == null)
             {
-                enemyArray[i] = enemyToAdd; 
+                enemyArray[i] = enemyToAdd;
                 success = true;
                 break; 
             }
         }
-
         return success; 
     }
 
@@ -92,5 +104,14 @@ public class LastRoom : MonoBehaviour
             EnemyController newEnemy = other.GetComponent<EnemyController>();
             AddEnemy(newEnemy);
         }
+    }
+
+    // This coroutine is a timer that delays the CheckForEnemiesLeft function. If this function runs without a delay,
+    // it runs before the object can register a collision with the enemies, causing the game to instantly transition to the win screen
+    IEnumerator DelayCheck()
+    {
+        enableCheck = false;
+        yield return new WaitForSeconds(1);
+        enableCheck = true;
     }
 }

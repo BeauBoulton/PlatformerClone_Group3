@@ -15,7 +15,5 @@ public class HeavyDoorScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet2")//needs heavy bullet to pass through the door
             Destroy(gameObject);
-
     }
-
 }

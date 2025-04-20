@@ -10,13 +10,19 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public Transform teleportPoint;
+    public Vector3 teleportPoint;
+
+    public GameObject spawnPoint;
+
+    private void Start()
+    {
+        teleportPoint = spawnPoint.transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         //sets pos of touched obj to the teleport point
-        other.transform.position = teleportPoint.position;
-
+        other.transform.position = teleportPoint;
 
     }
 }

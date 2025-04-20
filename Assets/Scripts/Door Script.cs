@@ -14,9 +14,9 @@ public class DoorScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bullet2")
+        {
+            Destroy(GetComponentInParent<DoorScript>().gameObject);
             Destroy(gameObject);
-
+        }
     }
-
-
 }

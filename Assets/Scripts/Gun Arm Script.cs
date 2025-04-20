@@ -32,35 +32,18 @@ public class GunArmScript : MonoBehaviour
     public float timeBetweenShots;
     public float startDelay;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //need to change to a key stroke "space bar" not invoke repeating
-       // InvokeRepeating("SpawnProjectile", startDelay, timeBetweenShots);
-      // playerRef = transform.parent.rotation.y;
-        
-
-
-    }
-
     private void Update()
     {
         playerRotation = Mathf.RoundToInt(transform.parent.rotation.eulerAngles.y);//updates with char position
-        print(playerRotation);
+
         shotDirection();//checks for character rotaion
 
+        //sets the space bar action to be what shoots
         if (canFire && Input.GetKeyDown(KeyCode.Space))
         {
             SpawnProjectile();
             StartCoroutine(ShotDelay());
         }
-        
-       
-
-        
-
-
     }
 
     //sets up the spawning of projectiles
@@ -81,30 +64,16 @@ public class GunArmScript : MonoBehaviour
         // Instantiates projectile using the bulletToUse object at the position of the gun arm
         GameObject projectile = Instantiate(bulletToUse, transform.position, bulletToUse.transform.rotation);
         if (projectile.GetComponent<Projectile>())
-        {
-            print(goingLeft);
+        {   
             projectile.GetComponent<Projectile>().goingLeft = goingLeft;
-
         }
-
     }
-    //sets the space bar action to be what shoots
-    
-   
 
     IEnumerator ShotDelay()
     {
-
-
-
         canFire = false;
         yield return new WaitForSeconds(shotCoolDown);
         canFire = true;
-
-
-
-
-
     }
 
     //decides which way to shoot the projectile
@@ -119,8 +88,6 @@ public class GunArmScript : MonoBehaviour
         {
             goingLeft = true;
         }
-
-
     }
 
 

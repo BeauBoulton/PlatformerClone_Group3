@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5960538351003588299}
   m_Layer: 0
   m_Name: Portal
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49fc71eb32f28448a0878bf8c290caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportPoint: {fileID: 5587569331033018567}
+  teleportPoint: {x: 0, y: 0, z: 0}
+  spawnPoint: {fileID: 6700006946639015211}
 --- !u!1 &6700006946639015211
 GameObject:
   m_ObjectHideFlags: 0

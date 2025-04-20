@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
 
     // Health and damage variables
+    public int eTanks = 1; 
     public int maxPlayerHealth = 99; 
     public int currentPlayerHealth = 99;
     public int enemyDamage = 15; 
@@ -57,6 +58,9 @@ public class PlayerController : MonoBehaviour
     {
         Jump();
         Move();
+        
+        eTanks = currentPlayerHealth / 99; 
+
         if (currentPlayerHealth <= 0)
         {
             SceneManager.LoadScene(gameOverScene);
@@ -140,6 +144,12 @@ public class PlayerController : MonoBehaviour
         {
             hasHeavyBullets = true;
             Destroy(other.gameObject); 
+        }
+
+        // If the collider is the portal, sets the new respawn point to the teleport point
+        if (other.gameObject.tag == "Portal")
+        {
+            startPosition = other.GetComponent<Portal>().teleportPoint;
         }
     }
 

@@ -12,6 +12,8 @@ TagManager:
   - Health Pack
   - Health Pickup
   - Wall
+  - Portal
+  - Enemy Counter
   layers:
   - Default
   - TransparentFX
